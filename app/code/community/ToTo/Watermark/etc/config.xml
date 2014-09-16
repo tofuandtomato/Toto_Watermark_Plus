@@ -30,4 +30,20 @@
             </updates>
         </layout>
     </frontend>
+	<global>
+        <models>
+            <catalog>
+                 <rewrite>
+                    <product_image>ToTo_Watermark_Catalog_Model_Product_Image</product_image>
+                 </rewrite>
+            </catalog>
+        </models>
+        <helpers>
+            <catalog>
+                <rewrite>
+                    <image>ToTo_Watermark_Catalog_Helper_Image</image>
+                </rewrite>
+            </catalog>
+        </helpers>
+    </global>
 </config>
