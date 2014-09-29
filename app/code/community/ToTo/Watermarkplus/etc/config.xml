@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @package    Toto_Watermarkplus
+ * @author     Tien Cao (http://tofuandtomato.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Toto_Watermarkplus>
+            <version>0.2.6</version>
+        </Toto_Watermarkplus>
+    </modules>
+    <frontend>
+        <routers>
+            <totowatermarkplus>
+                <use>standard</use>
+                <args>
+                    <module>Toto_Watermarkplus</module>
+                    <frontName>totowatermarkplus</frontName>
+                </args>
+            </totowatermarkplus>
+        </routers>
+    </frontend>
+
+    <global>
+        <models>
+            <watermarkplus>
+                <class>Toto_Watermarkplus_Model</class>
+            </watermarkplus>
+            <catalog>
+                <rewrite>
+                    <product_image>Toto_Watermarkplus_Model_Image</product_image>
+                </rewrite>
+            </catalog>
+        </models>
+        <helpers>
+            <watermarkplus>
+                <class>Toto_Watermarkplus_Helper</class>
+            </watermarkplus>
+            <catalog>
+                <rewrite>
+                    <image>Toto_Watermarkplus_Helper_Image</image>
+                </rewrite>
+            </catalog>
+        </helpers>
+    </global>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <watermarkplus_options>
+                                            <title>Watermark+ Module Section</title>
+                                        </watermarkplus_options>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <watermarkplus_options>
+            <settings>
+                <disable_ext>0</disable_ext>
+                <map>%requestHost-%manufacturer-%sku</map>
+                <unique>1</unique>
+                <lowercase>0</lowercase>
+                <generate_labels>0</generate_labels>
+                <use_filename_map_for_labels>1</use_filename_map_for_labels>
+                <label_map>%name %sku</label_map>
+            </settings>
+        </watermarkplus_options>
+    </default>
+</config>
