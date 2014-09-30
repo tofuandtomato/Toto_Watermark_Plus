@@ -8,9 +8,9 @@
 -->
 <config>
     <modules>
-        <ToTo_Watermark>
+        <Toto_Watermarkplus>
             <active>true</active>
             <codePool>community</codePool>
-        </ToTo_Watermark>
+        </Toto_Watermarkplus>
     </modules>
 </config>
