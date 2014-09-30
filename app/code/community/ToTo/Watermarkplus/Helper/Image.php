@@ -302,12 +302,10 @@ class Toto_Watermarkplus_Helper_Image extends Mage_Catalog_Helper_Image
     public function __toString() {
         $url = parent::__toString();
 
-
         $imagePath = $url;
         $baseUrl = Mage::getStoreConfig('web/unsecure/base_url');
         $imagePath = str_replace($baseUrl, '/', $imagePath);
         $imagePath = str_replace('/', DS, $imagePath);
-
         $imageUrl = $baseUrl . 'totowatermarkplus/index/index?image=' . $imagePath;
 
         return $imageUrl;

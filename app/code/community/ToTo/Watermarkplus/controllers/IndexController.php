@@ -34,6 +34,7 @@ class Toto_Watermarkplus_IndexController extends Mage_Core_Controller_Front_Acti
 
         $imagePath = Mage::getBaseDir() . $_GET['image'];
         $image = imagecreatefromjpeg($imagePath);
+
         if(!$image) {
             $image = imagecreatefrompng($imagePath);
         }
@@ -43,6 +44,27 @@ class Toto_Watermarkplus_IndexController extends Mage_Core_Controller_Front_Acti
         $wy = imagesy($image)/2 - imagesy($watermark)/2;
 
         imagecopy($image, $watermark, $wx, $wy, 0, 0, imagesx($watermark), imagesy($watermark));
+
+//        imagecopyresized(
+//            $image,
+//            $watermark,
+//            $imageSize[0]/2 -
+//            $newWatermarkWidth/2,
+//            $imageSize[1]/2 - $newWatermarkHeight/2,
+//            0,
+//            0,
+//            $newWatermarkWidth,
+//            $newWatermarkHeight,
+//            imagesx($watermark),
+//            imagesy($watermark)
+//        );
+
+
         imagejpeg($image, NULL, 100);
+
+
+        imagedestroy($image);
+        imagedestroy($watermark);
+
     }
 }
