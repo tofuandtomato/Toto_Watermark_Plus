@@ -19,7 +19,7 @@
  * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @package    Toto_Watermarkplus
- * @author     Tien Cao (http://tofuandtomato.com/)
+ * @author     Tofu & Tomato E-commerce (http://tofuandtomato.com/)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 

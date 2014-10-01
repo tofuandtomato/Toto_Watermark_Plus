@@ -20,7 +20,7 @@
  * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @package    Toto_Watermarkplus
- * @author     Tien Cao (http://tofuandtomato.com/)
+ * @author     Tofu & Tomato E-commerce (http://tofuandtomato.com/)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -306,8 +306,15 @@ class Toto_Watermarkplus_Helper_Image extends Mage_Catalog_Helper_Image
         $baseUrl = Mage::getStoreConfig('web/unsecure/base_url');
         $imagePath = str_replace($baseUrl, '/', $imagePath);
         $imagePath = str_replace('/', DS, $imagePath);
+
+        // decrypt image path
+        $imagePath = Mage::helper('core')->encrypt(base64_encode($imagePath));
+        $imagePath = str_replace('+', 'plus', $imagePath);
+        $imagePath = urlencode($imagePath);
+
         $imageUrl = $baseUrl . 'totowatermarkplus/index/index?image=' . $imagePath;
 
         return $imageUrl;
     }
+
 }

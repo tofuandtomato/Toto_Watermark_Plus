@@ -20,7 +20,7 @@
  * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @package    Toto_Watermarkplus
- * @author     Tien Cao (http://tofuandtomato.com/)
+ * @author     Tofu & Tomato E-commerce (http://tofuandtomato.com/)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -32,7 +32,13 @@ class Toto_Watermarkplus_IndexController extends Mage_Core_Controller_Front_Acti
         $watermarkPath = Mage::getBaseDir('media') . DS . 'watermarkplus' . DS .  Mage::getStoreConfig("watermarkplus_options/settings/image");
         $watermark = imagecreatefrompng($watermarkPath);
 
-        $imagePath = Mage::getBaseDir() . $_GET['image'];
+        // decrypt image path
+        $imagePath = $_GET['image'];
+        $imagePath = urldecode($imagePath);
+        $imagePath = str_replace('plus', '+', $imagePath);
+        $imagePath = base64_decode(Mage::helper('core')->decrypt($imagePath));
+
+        $imagePath = Mage::getBaseDir() . $imagePath;
         $image = imagecreatefromjpeg($imagePath);
 
         if(!$image) {
@@ -43,28 +49,17 @@ class Toto_Watermarkplus_IndexController extends Mage_Core_Controller_Front_Acti
         $wx = imagesx($image)/2 - imagesx($watermark)/2;
         $wy = imagesy($image)/2 - imagesy($watermark)/2;
 
-        imagecopy($image, $watermark, $wx, $wy, 0, 0, imagesx($watermark), imagesy($watermark));
+        if($wx < 0 || $wy < 0) {
+            imagecopyresized($image, $watermark, 0, 0, 0, 0, imagesx($image), imagesy($image), imagesx($watermark), imagesy($watermark));
+        } else {
+            imagecopy($image, $watermark, $wx, $wy, 0, 0, imagesx($watermark), imagesy($watermark));
+        }
 
-//        imagecopyresized(
-//            $image,
-//            $watermark,
-//            $imageSize[0]/2 -
-//            $newWatermarkWidth/2,
-//            $imageSize[1]/2 - $newWatermarkHeight/2,
-//            0,
-//            0,
-//            $newWatermarkWidth,
-//            $newWatermarkHeight,
-//            imagesx($watermark),
-//            imagesy($watermark)
-//        );
-
-
+        // output image data
         imagejpeg($image, NULL, 100);
 
-
+        // release memory
         imagedestroy($image);
         imagedestroy($watermark);
-
     }
 }
